@@ -6,7 +6,6 @@ plugins {
   id 'maven-publish'
 }
 
-apply from: "tasks.gradle"
 apply from: '../jacoco.gradle'
 
 android
