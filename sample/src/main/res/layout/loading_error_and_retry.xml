@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  >
+  <data>
+    <variable
+      name="stateManager"
+      type="fr.rolandl.rijsel.lifecycle.RijselViewModel.StateManager"
+      />
+  </data>
+
+  <RelativeLayout
+    android:id="@+id/loadingErrorAndRetry"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    app:animatedVisibility="@{stateManager.errorAndLoadingViewVisibility}"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/errorAndRetry"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/background"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      >
+      <TextView
+        android:id="@+id/errorText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="@{stateManager.errorMessage}"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/lorem"
+        />
+
+      <Button
+        android:id="@+id/retry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/errorText"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+      layout="@layout/loading"
+      app:stateManager="@{stateManager}"
+      />
+  </RelativeLayout>
+</layout>

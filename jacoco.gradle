@@ -1,0 +1,74 @@
+apply plugin: 'jacoco'
+
+tasks.withType(Test) {
+  jacoco.includeNoLocationClasses = true
+  jacoco.excludes = ['jdk.internal.*']
+}
+
+project.afterEvaluate {
+  tasks.create(name: "rijselCoverage", type: JacocoReport, dependsOn: [
+  ':library:testDebugUnitTest', ':library:createDebugCoverageReport',
+  ]) {
+
+    reports
+    {
+      html.required.set(true)
+      xml.required.set(true)
+      csv.required.set(false)
+    }
+
+    def fileFilter = [
+    '**/R.class',
+    '**/R$*.class',
+    '**/BuildConfig.*',
+    '**/Manifest*.*',
+    '**/*Test*.*',
+    '**/android/databinding/*',
+    '**/androidx/databinding/*',
+    '**/di/module/*',
+    '**/*MapperImpl*.*',
+    '**/*$ViewInjector*.*',
+    '**/*$ViewBinder*.*',
+    '**/BuildConfig.*',
+    '**/*Component*.*',
+    '**/*BR*.*',
+    '**/Manifest*.*',
+    '**/*$Lambda$*.*',
+    '**/*Companion*.*',
+    '**/*Module.*', /* filtering Dagger modules classes */
+    '**/*Dagger*.*', /* filtering Dagger-generated classes */
+    '**/*MembersInjector*.*',
+    '**/*_Factory*.*',
+    '**/*_Provide*Factory*.*',
+    '**/*Extensions*.*',
+    '**/*$Result.*', /* filtering `sealed` and `data` classes */
+    '**/*$Result$*.*', /* filtering `sealed` and `data` classes */
+    '**/*Args*.*', /* filtering Navigation Component generated classes */
+    '**/*Directions*.*', /* filtering Navigation Component generated classes */
+    '**/domovea/**/databinding/*', // databinding classes
+    '**/DataBindingTriggerClass*.*',
+    '**/rolandl/**/*_Impl.*', //Room
+    '**/rolandl/**/*_Impl*.*', //Room
+    '**/rolandl/**/*Test*.*', //BaseKataTestApplication
+    ]
+
+    classDirectories.setFrom(files([
+    fileTree(dir: "$project.rootDir/library/build/tmp/kotlin-classes/debug", excludes: fileFilter),
+    fileTree(dir: "$project.rootDir/library/build/intermediates/javac/debug", excludes: fileFilter),
+    ]))
+
+    def coverageSourceDirs = [
+    "$project.rootDir/library/src/main/kotlin"
+    ]
+
+    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+
+    def libraryTestsData = fileTree(dir: "${project.rootDir}/library/build/outputs/code_coverage/debugAndroidTest/connected/", includes: ["**/*.ec"])
+
+    executionData(files([
+    libraryTestsData,
+    "$project.rootDir/library/build/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+    ]))
+  }
+}

@@ -1,0 +1,5 @@
+rootProject.name = "Rijsel Android"
+include ":library"
+include ":sample"
+include ":sample-compose"
+
