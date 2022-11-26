@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -24,13 +23,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fr.rolandl.sample.compose.composable.DefaultBody
 import fr.rolandl.sample.compose.viewmodel.activity.ThirdActivityViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -98,10 +98,11 @@ class ThirdActivity
     }
   }
 
+  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Composable
   private fun ThirdContent(navController: NavController)
   {
-    val theItems = viewModel?.persons?.collectAsState()?.value ?: listOf()
+    val theItems = viewModel?.persons?.collectAsStateWithLifecycle()?.value ?: listOf()
 
     Box(
       modifier = Modifier
@@ -111,8 +112,8 @@ class ThirdActivity
     ) {
       Column {
         Text(text = viewModel?.myString ?: "")
-        Text(text = viewModel?.anotherString?.collectAsState()?.value ?: "")
-        Text(text = stringResource(viewModel?.resString?.collectAsState()?.value ?: throw IllegalArgumentException()))
+        Text(text = viewModel?.anotherString?.collectAsStateWithLifecycle()?.value ?: "")
+        Text(text = stringResource(viewModel?.resString?.collectAsStateWithLifecycle()?.value ?: throw IllegalArgumentException()))
         Button(
           onClick = {
             viewModel?.refreshViewModel(true) {

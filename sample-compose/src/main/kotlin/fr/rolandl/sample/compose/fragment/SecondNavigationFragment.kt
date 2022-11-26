@@ -8,19 +8,21 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import fr.rolandl.sample.compose.composable.LoadingErrorAndRetry
-import fr.rolandl.sample.compose.theme.SampleTheme
-import fr.rolandl.sample.compose.viewmodel.fragment.SecondNavigationFragmentViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.rijsel.content.RijselSharedFlowListener
 import fr.rolandl.rijsel.content.RijselSharedFlowListenerProvider
 import fr.rolandl.rijsel.fragment.app.RijselComposeFragmentConfigurable
+import fr.rolandl.sample.compose.composable.LoadingErrorAndRetry
+import fr.rolandl.sample.compose.theme.SampleTheme
+import fr.rolandl.sample.compose.viewmodel.fragment.SecondNavigationFragmentViewModel
 import timber.log.Timber
 
 /**
@@ -93,15 +95,16 @@ class SecondNavigationFragment :
   private fun getIdentityHashCode() =
       System.identityHashCode(this).toString()
 
+  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Composable
   override fun Body()
   {
-    val theItems = viewModel?.items?.collectAsState()?.value ?: listOf()
+    val theItems = viewModel?.items?.collectAsStateWithLifecycle()?.value ?: listOf()
 
     SampleTheme {
       Scaffold (
         content = {
-          Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+          Box(modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(it)) {
             LazyColumn(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
               items(theItems) {
                 Text(text = "${it.text} - ${it.fragmentIdentityHashCode}")

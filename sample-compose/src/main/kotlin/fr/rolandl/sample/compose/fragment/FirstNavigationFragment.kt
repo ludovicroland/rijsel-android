@@ -7,18 +7,20 @@ import android.view.View
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import fr.rolandl.sample.compose.composable.LoadingErrorAndRetry
-import fr.rolandl.sample.compose.theme.SampleTheme
-import fr.rolandl.sample.compose.viewmodel.fragment.FirstNavigationFragmentViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.rijsel.content.RijselSharedFlowListener
 import fr.rolandl.rijsel.content.RijselSharedFlowListenerProvider
 import fr.rolandl.rijsel.fragment.app.RijselComposeFragmentConfigurable
+import fr.rolandl.sample.compose.composable.LoadingErrorAndRetry
+import fr.rolandl.sample.compose.theme.SampleTheme
+import fr.rolandl.sample.compose.viewmodel.fragment.FirstNavigationFragmentViewModel
 
 /**
  * @author Ludovic Roland
@@ -64,16 +66,17 @@ class FirstNavigationFragment
   private fun getIdentityHashCode() =
       System.identityHashCode(this).toString()
 
+  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Composable
   override fun Body()
   {
     SampleTheme {
       Scaffold (
         content = {
-          Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+          Box(modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(it)) {
             Text(
               modifier = Modifier.align(Alignment.Center),
-              text = viewModel?.counter?.collectAsState()?.value?.toString() ?: ""
+              text = viewModel?.counter?.collectAsStateWithLifecycle()?.value?.toString() ?: ""
             )
 
             viewModel?.let {

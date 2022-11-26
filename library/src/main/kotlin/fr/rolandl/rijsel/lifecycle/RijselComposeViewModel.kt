@@ -13,7 +13,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -47,11 +49,11 @@ abstract class RijselComposeViewModel(application: Application, val savedStateHa
 
     val isErrorAndLoadingViewVisible = state.map {
       if (it is State.LoadedState) false else true
-    }
+    }.stateIn(coroutineScope, WhileSubscribed(5_000), false)
 
     val isLoadingViewVisible = state.map {
       if (it is State.ErrorState) false else true
-    }
+    }.stateIn(coroutineScope, WhileSubscribed(5_000), true)
 
   }
 

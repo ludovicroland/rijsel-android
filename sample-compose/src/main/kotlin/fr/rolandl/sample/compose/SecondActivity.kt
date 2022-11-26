@@ -11,10 +11,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.sample.compose.composable.DefaultBody
 import fr.rolandl.sample.compose.viewmodel.activity.SecondActivityViewModel
 
@@ -56,6 +57,7 @@ class SecondActivity
     )
   }
 
+  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Preview
   @Composable
   private fun Content()
@@ -67,7 +69,7 @@ class SecondActivity
     ) {
       Column {
         Text(text = viewModel?.myString ?: "")
-        Text(text = viewModel?.anotherString?.collectAsState()?.value ?: "")
+        Text(text = viewModel?.anotherString?.collectAsStateWithLifecycle()?.value ?: "")
         Button(
           onClick = {
             viewModel?.refreshViewModel(true) {

@@ -15,24 +15,26 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
-import fr.rolandl.sample.compose.theme.Purple600
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.rijsel.lifecycle.RijselComposeViewModel
+import fr.rolandl.sample.compose.theme.Purple600
 
 /**
  * @author Ludovic Roland
  * @since 2022.04.13
  */
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun LoadingErrorAndRetry(viewModel: RijselComposeViewModel)
 {
-  val visibility by viewModel.stateManager.isErrorAndLoadingViewVisible.collectAsState(initial = true)
+  val visibility by viewModel.stateManager.isErrorAndLoadingViewVisible.collectAsStateWithLifecycle()
 
   AnimatedVisibility(
     visible = visibility,
@@ -51,10 +53,11 @@ fun LoadingErrorAndRetry(viewModel: RijselComposeViewModel)
   }
 }
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun ErrorAndRetry(viewModel: RijselComposeViewModel)
 {
-  val errorMessage by viewModel.stateManager.errorMessage.collectAsState(fr.rolandl.sample.compose.R.string.error)
+  val errorMessage by viewModel.stateManager.errorMessage.collectAsStateWithLifecycle()
 
   ConstraintLayout(modifier = Modifier
     .fillMaxHeight()
@@ -103,10 +106,11 @@ fun ErrorAndRetry(viewModel: RijselComposeViewModel)
   }
 }
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun Loading(stateManager: RijselComposeViewModel.StateManager)
 {
-  val visibility by stateManager.isLoadingViewVisible.collectAsState(initial = true)
+  val visibility by stateManager.isLoadingViewVisible.collectAsStateWithLifecycle()
 
   AnimatedVisibility(
       visible = visibility,
