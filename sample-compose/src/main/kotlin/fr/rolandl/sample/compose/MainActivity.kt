@@ -147,6 +147,7 @@ class MainActivity
           Box(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .padding(it)
           ) {
             Content()
 

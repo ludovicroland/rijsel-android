@@ -49,7 +49,7 @@ abstract class RijselComposeViewModel(application: Application, val savedStateHa
 
     val isErrorAndLoadingViewVisible = state.map {
       if (it is State.LoadedState) false else true
-    }.stateIn(coroutineScope, WhileSubscribed(5_000), false)
+    }.stateIn(coroutineScope, WhileSubscribed(5_000), true)
 
     val isLoadingViewVisible = state.map {
       if (it is State.ErrorState) false else true
