@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.sample.compose.composable.DefaultBody
 import fr.rolandl.sample.compose.viewmodel.activity.SecondActivityViewModel
@@ -57,7 +56,6 @@ class SecondActivity
     )
   }
 
-  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Preview
   @Composable
   private fun Content()

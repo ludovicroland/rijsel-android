@@ -135,7 +135,7 @@ class MainActivity
             }
           }
         },
-        drawerBackgroundColor = colorResource(R.color.design_default_color_error),
+        drawerBackgroundColor = colorResource(com.google.android.material.R.color.design_default_color_error),
         drawerContent = {
           Box(
             modifier = Modifier

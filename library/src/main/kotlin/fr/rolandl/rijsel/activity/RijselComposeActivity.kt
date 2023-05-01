@@ -223,4 +223,5 @@ abstract class RijselComposeActivity<AggregateClass : RijselComposeActivityAggre
   {
 
   }
+
 }

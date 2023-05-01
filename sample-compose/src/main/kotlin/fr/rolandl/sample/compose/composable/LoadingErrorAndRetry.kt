@@ -21,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.rijsel.lifecycle.RijselComposeViewModel
 import fr.rolandl.sample.compose.theme.Purple600
@@ -30,7 +29,6 @@ import fr.rolandl.sample.compose.theme.Purple600
  * @author Ludovic Roland
  * @since 2022.04.13
  */
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun LoadingErrorAndRetry(viewModel: RijselComposeViewModel)
 {
@@ -53,7 +51,6 @@ fun LoadingErrorAndRetry(viewModel: RijselComposeViewModel)
   }
 }
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun ErrorAndRetry(viewModel: RijselComposeViewModel)
 {
@@ -106,7 +103,6 @@ fun ErrorAndRetry(viewModel: RijselComposeViewModel)
   }
 }
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun Loading(stateManager: RijselComposeViewModel.StateManager)
 {

@@ -15,7 +15,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fr.rolandl.rijsel.content.RijselSharedFlowListener
 import fr.rolandl.rijsel.content.RijselSharedFlowListenerProvider
@@ -95,7 +94,6 @@ class SecondNavigationFragment :
   private fun getIdentityHashCode() =
       System.identityHashCode(this).toString()
 
-  @OptIn(ExperimentalLifecycleComposeApi::class)
   @Composable
   override fun Body()
   {

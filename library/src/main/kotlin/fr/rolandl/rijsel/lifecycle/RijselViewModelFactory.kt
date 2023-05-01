@@ -11,7 +11,7 @@ import java.lang.reflect.Constructor
 import java.util.*
 
 /**
- * @author Aiman Salmi
+ * @author Ludovic Roland
  * @since 2021.08.18
  */
 class RijselViewModelFactory(private val dispatcher: CoroutineDispatcher,
@@ -25,7 +25,7 @@ class RijselViewModelFactory(private val dispatcher: CoroutineDispatcher,
 
   private val ANDROID_VIEWMODEL_SIGNATURE = arrayOf(Application::class.java, SavedStateHandle::class.java)
 
-  override fun <T : ViewModel?> create(key: String, modelClass: Class<T>, handle: SavedStateHandle): T
+  override fun <T : ViewModel> create(key: String, modelClass: Class<T>, handle: SavedStateHandle): T
   {
     var constructor: Constructor<T>? = findMatchingConstructor(modelClass, ANDROID_VIEWMODEL_DISPATCHER_SIGNATURE)
 

@@ -8,6 +8,8 @@ android
 
   defaultConfig
   {
+    namespace 'fr.rolandl.sample'
+
     applicationId "fr.rijsel.sample"
 
     minSdkVersion 21
@@ -30,6 +32,7 @@ android
   {
     viewBinding true
     dataBinding true
+    buildConfig true
   }
 
   buildTypes
@@ -43,23 +46,40 @@ android
 
   compileOptions
   {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 
   kotlinOptions
   {
-    jvmTarget = "1.8"
+    jvmTarget = "17"
   }
 
-  packagingOptions {
-    jniLibs {
+  packagingOptions
+  {
+    jniLibs
+    {
       excludes += ['META-INF/licenses/**']
     }
+
     resources {
-      excludes += ['**/attach_hotspot_windows.dll', 'META-INF/licenses/**', 'META-INF/ASL2.0', 'META-INF/AL2.0', 'META-INF/LGPL2.1', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/DEPENDENCIES.txt']
+      excludes += [
+        '**/attach_hotspot_windows.dll',
+        'META-INF/licenses/**',
+        'META-INF/ASL2.0',
+        'META-INF/AL2.0',
+        'META-INF/LGPL2.1',
+        'META-INF/NOTICE',
+        'META-INF/NOTICE.txt',
+        'META-INF/notice.txt',
+        'META-INF/LICENSE',
+        'META-INF/LICENSE.txt',
+        'META-INF/license.txt',
+        'META-INF/DEPENDENCIES.txt'
+      ]
     }
   }
+
 }
 
 dependencies
@@ -70,7 +90,7 @@ dependencies
   //Androidx
   implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-  implementation 'com.google.android.material:material:1.7.0'
+  implementation 'com.google.android.material:material:1.8.0'
 
   // Navigation
   implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -84,8 +104,8 @@ dependencies
   implementation(project(":library"))
 
   // Android Tests
-  androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-  androidTestImplementation 'androidx.test:runner:1.5.1'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+  androidTestImplementation 'androidx.test:runner:1.5.2'
   androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
-  androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+  androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
 }
