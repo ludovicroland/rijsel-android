@@ -1,6 +1,5 @@
 package fr.rolandl.rijsel.lifecycle
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import fr.rolandl.rijsel.app.Rijselizer
 

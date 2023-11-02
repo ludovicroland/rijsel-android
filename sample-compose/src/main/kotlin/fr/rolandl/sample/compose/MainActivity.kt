@@ -253,7 +253,7 @@ class MainActivity
         }
         Button(
           onClick = {
-            startActivity(Intent(this@MainActivity, NavigationActivity::class.java))
+            //startActivity(Intent(this@MainActivity, NavigationActivity::class.java))
           },
         ) {
           Text(text = "BottomBar Navigation")

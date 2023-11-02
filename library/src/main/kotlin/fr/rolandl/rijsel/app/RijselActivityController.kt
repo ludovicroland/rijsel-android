@@ -3,7 +3,6 @@ package fr.rolandl.rijsel.app
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import fr.rolandl.rijsel.R

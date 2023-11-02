@@ -18,5 +18,5 @@ dependencyResolutionManagement {
 rootProject.name = "Rijsel Android"
 
 include(":library")
-//include(":sample-compose")
+include(":sample-compose")
 

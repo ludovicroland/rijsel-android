@@ -43,11 +43,5 @@
       android:name=".ThirdActivity"
       android:exported="false"
       />
-
-    <activity
-      android:name=".NavigationActivity"
-      android:configChanges="orientation|keyboardHidden|screenLayout"
-      android:exported="false"
-      />
   </application>
 </manifest>

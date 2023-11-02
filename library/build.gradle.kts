@@ -1,6 +1,6 @@
 plugins {
   //Android
-  alias(libs.plugins.android.application)
+  alias(libs.plugins.android.library)
 
   //Kotlin
   alias(libs.plugins.kotlin.android)
@@ -54,7 +54,10 @@ dependencies {
   // Kotlin
   api(libs.android.core.ktx)
 
-  //Compose
+  // Android
+  api(libs.android.fragment.ktx)
+
+  // Compose
   api(platform(libs.compose.bom))
   api(libs.compose.material)
   api(libs.compose.ui.tooling)

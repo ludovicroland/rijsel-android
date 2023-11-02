@@ -1,7 +1,6 @@
 package fr.rolandl.rijsel.app
 
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import fr.rolandl.rijsel.activity.RijselComposeActivityAggregate
 import fr.rolandl.rijsel.activity.RijselComposeActivityConfigurable
