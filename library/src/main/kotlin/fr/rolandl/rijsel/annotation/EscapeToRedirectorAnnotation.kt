@@ -16,7 +16,7 @@ import java.lang.annotation.Inherited
  * @author Ludovic Roland
  * @since 2018.12.31
  */
-@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
 @Inherited
 annotation class EscapeToRedirectorAnnotation

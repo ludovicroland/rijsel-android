@@ -10,7 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import fr.rolandl.rijsel.app.Rijselable
 import fr.rolandl.rijsel.app.Rijselizer
 import fr.rolandl.rijsel.content.RijselSharedFlowListener
@@ -18,7 +22,6 @@ import fr.rolandl.rijsel.lifecycle.RijselComposeViewModel
 import fr.rolandl.rijsel.lifecycle.RijselViewModelFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
