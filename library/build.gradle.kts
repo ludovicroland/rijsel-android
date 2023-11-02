@@ -1,11 +1,12 @@
 plugins {
-  //Android
+  // Android
   alias(libs.plugins.android.library)
 
-  //Kotlin
+  // Kotlin
   alias(libs.plugins.kotlin.android)
 
-  //id 'maven-publish'
+  // maven
+  `maven-publish`
 }
 
 android {
@@ -69,45 +70,17 @@ dependencies {
   // Third party
   api(libs.timber)
 }
-//
-//task androidJavadocs(type: Javadoc) {
-//  enabled = false
-//  source = android.sourceSets.main.java.srcDirs
-//  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//
-//  android.libraryVariants.all { variant ->
-//    if (variant.name == 'release')
-//    {
-//      owner.classpath += variant.javaCompileProvider.get().classpath
-//    }
-//  }
-//  exclude '**/R.html', '**/R.*.html', '**/index.html'
-//}
-//
-//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-//  archiveClassifier.set('javadoc')
-//  from androidJavadocs.destinationDir
-//}
-//
-//task androidSourcesJar(type: Jar) {
-//  archiveClassifier.set('sources')
-//  from android.sourceSets.main.java.srcDirs
-//}
-//
-//publishing
-//{
-//  publications
-//  {
-//    release(MavenPublication)
-//    {
-//      groupId = 'fr.rolandl'
-//      artifactId = 'rijsel'
-//      version = '2.0.0'
-//
-//      afterEvaluate
-//      {
-//        from components.release
-//      }
-//    }
-//  }
-//}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      groupId = "fr.rolandl"
+      artifactId = "rijsel"
+      version = "2.0.0-beta1"
+
+      afterEvaluate {
+        from(components["release"])
+      }
+    }
+  }
+}
